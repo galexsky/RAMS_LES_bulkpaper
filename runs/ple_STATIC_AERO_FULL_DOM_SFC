@@ -1,0 +1,17 @@
+#PBS -S /bin/csh
+#PBS -V
+#PBS -q devel
+#PBS -lselect=1:ncpus=28:mpiprocs=28:model=bro,walltime=0:30:0
+#PBS -j oe
+#PBS -o /nobackupp2/swfreema/CAMP2Ex_2019_basin_base/rams_std_out
+#PBS -N BASIN_2019_STATIC_AERO_MKSFILE
+#PBS -m be
+#PBS -r n
+
+setenv MPI_TYPE_DEPTH 16
+module load mpi-hpe/mpt.2.21 comp-intel/2018.3.222 szip/2.1.1 hdf5/1.8.18_mpt
+##module load mpi-hpe/mpt.2.17r13 comp-intel/2018.3.222 szip/2.1.1 hdf5/1.8.18_mpt
+#module load mpi-hpcx/2.4.0 comp-intel/2018.3.222 szip/2.1.1 hdf5/1.8.18_mpt
+cd /nobackupp2/swfreema/CAMP2Ex_2019_basin_base/RAMS_BASE_STATIC_AERO/rams-main-repo/
+
+mpiexec ./bin.rams/rams-6.2.12 -f ./runs/RAMSIN.STATIC_AERO_FULL_DOM_SFC  >& /nobackupp2/swfreema/CAMP2Ex_2019_basin_base/rams_std_out/basin_2019_static_aero_mksfile
